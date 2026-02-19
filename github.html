@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub File Manager</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <div class="header-tag">Tool v2.0</div>
+            <h1>GitHub<br><span>File Manager</span></h1>
+            <p class="subtitle">// Upload, fetch, and manage repository files</p>
+        </div>
+
+        <!-- Token Section -->
+        <div class="section token-section">
+            <span class="section-number">00</span>
+            <h2>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                </svg>
+                Authentication
+            </h2>
+            <div class="input-group">
+                <label>GitHub Personal Access Token</label>
+                <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+            </div>
+            <div class="token-warning">
+                ⚠ Never share your token. It is not stored anywhere — only used during this session.<br>
+                Generate one at: github.com → Settings → Developer Settings → Personal Access Tokens
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="section">
+            <span class="section-number">01</span>
+            <h2>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                Upload File
+            </h2>
+            <div class="input-group">
+                <label>Repository (username/repo)</label>
+                <input type="text" id="uploadRepo" placeholder="Christianjames01/CC---106">
+            </div>
+            <div class="input-group">
+                <label>Select File</label>
+                <input type="file" id="uploadFile">
+            </div>
+            <div class="input-group">
+                <label>Destination Path (optional)</label>
+                <input type="text" id="uploadPath" placeholder="folder/filename.txt">
+            </div>
+            <button onclick="uploadFile()">Upload to Repository</button>
+            <div id="uploadStatus" class="status"></div>
+        </div>
+
+        <!-- Fetch Text Section -->
+        <div class="section">
+            <span class="section-number">02</span>
+            <h2>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+                Fetch Text File
+            </h2>
+            <div class="input-group">
+                <label>Repository (username/repo)</label>
+                <input type="text" id="textRepo" placeholder="Christianjames01/repo">
+            </div>
+            <div class="input-group">
+                <label>File Path</label>
+                <input type="text" id="textFilePath" placeholder="folder/file.txt">
+            </div>
+            <button onclick="fetchTextFile()">Fetch File</button>
+            <div id="textOutput" class="output"></div>
+        </div>
+
+        <!-- Fetch Image Section -->
+        <div class="section">
+            <span class="section-number">03</span>
+            <h2>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <polyline points="21 15 16 10 5 21" />
+                </svg>
+                Fetch Image
+            </h2>
+            <div class="input-group">
+                <label>Repository (username/repo)</label>
+                <input type="text" id="imageRepo" placeholder="Christianjames01/repo">
+            </div>
+            <div class="input-group">
+                <label>Image Path</label>
+                <input type="text" id="imageFilePath" placeholder="images/photo.jpg">
+            </div>
+            <button onclick="fetchImage()">Fetch Image</button>
+            <div id="imageOutput" class="output"></div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-name">Christian James Ortouste</div>
+            <div class="footer-github">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                Christianjames01
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getToken() {
+            const token = document.getElementById('githubToken').value.trim();
+            if (!token) {
+                alert('Please enter your GitHub token first (Section 00)');
+                return null;
+            }
+            return token;
+        }
+
+        async function uploadFile() {
+            const token = getToken();
+            if (!token) return;
+
+            const repo = document.getElementById('uploadRepo').value.trim() || 'Christianjames01/repo';
+            const fileInput = document.getElementById('uploadFile');
+            const customPath = document.getElementById('uploadPath').value.trim();
+            const statusDiv = document.getElementById('uploadStatus');
+
+            if (!fileInput.files.length) {
+                showStatus(statusDiv, '✗ Please select a file first.', 'error');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            showStatus(statusDiv, '⟳ Uploading...', 'success');
+
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                const content = event.target.result.split(',')[1];
+                const path = customPath || file.name;
+                const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${token}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Upload ${file.name}`,
+                            content: content
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (response.ok) {
+                        showStatus(statusDiv, `✓ Uploaded successfully!\n→ ${result.content.html_url}`, 'success');
+                    } else {
+                        showStatus(statusDiv, `✗ Error: ${result.message || 'Upload failed'}`, 'error');
+                    }
+                } catch (error) {
+                    showStatus(statusDiv, `✗ Upload failed: ${error.message}`, 'error');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function fetchTextFile() {
+            const token = getToken();
+            if (!token) return;
+
+            const repo = document.getElementById('textRepo').value.trim() || 'Christianjames01/repo';
+            const filePath = document.getElementById('textFilePath').value.trim();
+            const outputDiv = document.getElementById('textOutput');
+
+            if (!filePath) {
+                outputDiv.textContent = 'Please enter a file path.';
+                outputDiv.className = 'output visible';
+                return;
+            }
+
+            outputDiv.textContent = '⟳ Loading...';
+            outputDiv.className = 'output visible';
+
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${repo}/contents/${filePath}?ref=main`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(`${response.status} — ${err.message || response.statusText}`);
+                }
+
+                const data = await response.json();
+                outputDiv.textContent = atob(data.content);
+            } catch (error) {
+                outputDiv.textContent = `✗ Failed: ${error.message}`;
+            }
+        }
+
+        async function fetchImage() {
+            const token = getToken();
+            if (!token) return;
+
+            const repo = document.getElementById('imageRepo').value.trim() || 'Christianjames01/CC---106';
+            const filePath = document.getElementById('imageFilePath').value.trim();
+            const outputDiv = document.getElementById('imageOutput');
+
+            if (!filePath) {
+                outputDiv.textContent = 'Please enter an image path.';
+                outputDiv.className = 'output visible';
+                return;
+            }
+
+            outputDiv.textContent = '⟳ Loading image...';
+            outputDiv.className = 'output visible';
+
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${repo}/contents/${filePath}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    }
+                );
+
+                if (!response.ok) {
+                    const err = await response.json().catch(() => ({}));
+                    throw new Error(`${response.status} — ${err.message || response.statusText}`);
+                }
+
+                const data = await response.json();
+
+                if (data.content) {
+                    const ext = filePath.split('.').pop().toLowerCase();
+                    const mimeMap = { jpg: 'jpeg', jpeg: 'jpeg', png: 'png', gif: 'gif', webp: 'webp', svg: 'svg+xml' };
+                    const mime = `image/${mimeMap[ext] || 'jpeg'}`;
+                    const base64 = data.content.replace(/\n/g, '');
+                    outputDiv.innerHTML = `<img src="data:${mime};base64,${base64}" alt="${filePath}">`;
+                } else {
+                    outputDiv.textContent = '✗ Image not found or file exceeds 1MB limit.';
+                }
+            } catch (error) {
+                outputDiv.textContent = `✗ Error: ${error.message}`;
+            }
+        }
+
+        function showStatus(element, message, type) {
+            element.textContent = message;
+            element.className = `status ${type}`;
+        }
+    </script>
+</body>
+
+</html>
